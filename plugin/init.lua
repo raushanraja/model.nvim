@@ -4,7 +4,7 @@ end
 
 vim.filetype.add({
   extension = {
-    mchat = 'mchat',
+    mchat = 'markdown',
   },
 })
 

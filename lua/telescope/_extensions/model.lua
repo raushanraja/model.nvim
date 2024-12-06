@@ -11,7 +11,8 @@ local Previewer = require('telescope.previewers.previewer')
 
 local function get_mchat_buffers()
   return vim.tbl_filter(function(bufnr)
-    return vim.api.nvim_get_option_value('filetype', { buf = bufnr }) == 'mchat'
+    return vim.api.nvim_get_option_value('filetype', { buf = bufnr })
+      == 'markdown'
   end, vim.api.nvim_list_bufs())
 end
 
