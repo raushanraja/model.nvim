@@ -25,7 +25,7 @@ local M = {}
 
 --- Splits lines into array of { role: 'user' | 'assistant', content: string }
 --- If first line starts with '> ', then the rest of that line is system message
----@param text string[] Text of buffer. '\n======\n' denote alternations between user and assistant roles
+---@param text string[] Text of buffer. '\n------\n' denote alternations between user and assistant roles
 ---@return { messages: { role: 'user'|'assistant', content: string}[], system?: string }
 local function split_messages(text)
   local messages = {}
@@ -55,14 +55,14 @@ local function split_messages(text)
       if system == nil then
         table.insert(chunk_lines, line)
       end
-    elseif line == '======' then
+    elseif line == '------' then
       add_message()
     else
       table.insert(chunk_lines, line)
     end
   end
 
-  -- add text after last `======` if not empty
+  -- add text after last `------` if not empty
   if table.concat(chunk_lines, '') ~= '' then
     add_message()
   end
@@ -140,7 +140,7 @@ end
 --- Parse a chat file. Must start with a chat name, can follow with a lua table
 --- of config between `---`. If the next line starts with `> `, it is parsed as
 --- the system instruction. The rest of the text is parsed as alternating
---- user/assistant messages, with `\n======\n` delimiters.
+--- user/assistant messages, with `\n------\n` delimiters.
 ---@param text string[]
 ---@return { contents: ChatContents, chat: string }
 function M.parse(text)
@@ -180,7 +180,7 @@ function M.to_string(contents, name)
 
   for i, message in ipairs(contents.messages) do
     if i ~= 1 then
-      result = result .. '\n======\n'
+      result = result .. '\n------\n'
     end
 
     if message.role == 'user' then
@@ -191,7 +191,7 @@ function M.to_string(contents, name)
   end
 
   if #contents.messages % 2 == 0 then
-    result = result .. '\n======\n'
+    result = result .. '\n------\n'
   end
 
   return vim.fn.trim(result, '\n', 2) -- trim trailing newline
@@ -288,7 +288,7 @@ function M.run_chat(opts)
     error('Chat prompt run() returned nil')
   end
 
-  local starter_separator = needs_nl(buf_lines) and '\n======\n' or '======\n'
+  local starter_separator = needs_nl(buf_lines) and '\n------\n' or '------\n'
   local seg
 
   local last_msg = parsed.contents.messages[#parsed.contents.messages]
@@ -314,10 +314,10 @@ function M.run_chat(opts)
       if text then
         seg.set_text(
           (last_msg.role == 'user' and (starter_separator .. text) or text)
-            .. '\n======\n'
+            .. '\n------\n'
         )
       else
-        seg.add('\n======\n')
+        seg.add('\n------\n')
       end
 
       seg.clear_hl()

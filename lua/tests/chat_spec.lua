@@ -37,9 +37,9 @@ openai
 
 Count to three
 
-======
+------
 1, 2, 3.
-======
+------
 
 Thanks]]))
       )
@@ -65,9 +65,9 @@ openai
 
 Count to three
 
-======
+------
 1, 2, 3.
-======
+------
 ]]))
       )
     end)
@@ -89,9 +89,9 @@ openai
 
 Count to three
 
-======
+------
 1, 2, 3.
-======
+------
 ]]))
       )
     end)
@@ -158,9 +158,9 @@ openai
 
 Count to three
 
-======
+------
 1, 2, 3.
-======
+------
 
 Thanks]],
         chat.to_string({
@@ -185,9 +185,9 @@ openai
 
 Count to three
 
-======
+------
 1, 2, 3.
-======
+------
 
 Thanks]],
         chat.to_string({
@@ -209,9 +209,9 @@ Thanks]],
 
 Count to three
 
-======
+------
 1, 2, 3.
-======
+------
 
 Thanks]],
         chat.to_string({
