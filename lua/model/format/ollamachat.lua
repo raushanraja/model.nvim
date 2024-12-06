@@ -8,16 +8,16 @@ return {
       error('Need at least one message')
     end
 
-    local messages = {}
+    local formatted_messages = {}
     local max_messages = math.min(5, #messages)
 
     for i = #messages - max_messages + 1, #messages do
       local msg = messages[i]
-      table.insert(messages, { role = 'user', content = msg.content })
+      table.insert(formatted_messages, { role = 'user', content = msg.content })
     end
 
     return {
-      formatted_messages = messages,
+      messages = formatted_messages,
       raw = true,
     }
   end,
