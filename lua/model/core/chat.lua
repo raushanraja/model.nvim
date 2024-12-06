@@ -253,7 +253,7 @@ function M.create_buffer(text, smods)
     end
   end
 
-  vim.o.ft = 'mchat'
+  vim.o.ft = 'markdown'
   vim.cmd.syntax({ 'sync', 'fromstart' })
 
   local lines = vim.fn.split(text, '\n')

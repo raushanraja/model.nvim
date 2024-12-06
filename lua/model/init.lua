@@ -297,7 +297,7 @@ local function setup_commands()
         args
       )
 
-      if vim.o.ft == 'mchat' then
+      if vim.o.ft == 'markdown' then
         -- copy current messages to a new built buffer with target settings
 
         local current = chat.parse(vim.api.nvim_buf_get_lines(0, 0, -1, false))
@@ -330,9 +330,9 @@ local function setup_commands()
         )
       end
     else -- `:Mchat`
-      if vim.o.ft ~= 'mchat' then
+      if vim.o.ft ~= 'markdown' then
         error(
-          'Not in mchat buffer. Either `:set ft=mchat` or run `:Mchat [name]`.'
+          'Not in mchat buffer. Either `:set ft=markdown` or run `:Mchat [name]`.'
         )
       end
 
@@ -368,7 +368,7 @@ local function setup_commands()
     local count = require('model.store.util').tiktoken_count
     local text = vim.api.nvim_buf_get_lines(0, 0, -1, false)
 
-    if vim.o.ft == 'mchat' then
+    if vim.o.ft == 'markdown' then
       local parsed = chat.parse(text)
       local total = count(vim.json.encode(parsed.contents.messages))
 
