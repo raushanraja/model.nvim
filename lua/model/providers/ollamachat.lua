@@ -40,7 +40,7 @@ return {
       end
 
       if item.done then
-        handlers.on_finish()
+        handlers.on_finish(item.message.content)
       end
 
       if item.error then
